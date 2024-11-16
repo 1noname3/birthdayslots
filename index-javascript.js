@@ -14,6 +14,7 @@ const sounds = {
   "gem": document.getElementById("gem-sound"),
   "Spinning": document.getElementById("slotspinning-sound")
 };
+sounds["Spinning"].volume = 0.5;
 
 // Probability setup (values must add up to 1.0)
 const animationProbabilities = {
@@ -32,6 +33,16 @@ const finalProbabilities = {
 
 let isCooldown = false; // Cooldown flag
 
+function stopAllSounds() {
+  Object.values(sounds).forEach(sound => {
+    if (sound) { // Check if the sound is not null
+      sound.pause();
+      sound.currentTime = 0; // Reset to the beginning
+    }
+  });
+}
+
+
 function getRandomItem(probabilities = animationProbabilities) {
   const rand = Math.random();
   let sum = 0;
@@ -46,6 +57,9 @@ function startRandomImageAnimation() {
   if (isCooldown) return; // Exit if cooldown is active
   isCooldown = true; // Set cooldown
 
+  stopAllSounds(); // Stop any currently playing sounds
+  sounds["Spinning"].play(); // Start the spinning sound
+
   const slots = document.querySelectorAll('.Slot');
   const birthdayMessage = document.getElementById("birthdayMessage");
   const sigmaMessages = document.getElementsByClassName("Sigma-message");
@@ -55,7 +69,7 @@ function startRandomImageAnimation() {
   // Hide the messages
   Array.from(sigmaMessages).forEach(message => message.style.display = "none");
   birthdayMessage.style.display = "none";
-  sounds["Spinning"].play();
+
   slots.forEach(slot => {
     const interval = setInterval(() => {
       const randomItem = getRandomItem();
@@ -81,7 +95,7 @@ function startRandomImageAnimation() {
 
     checkForMatch();
     isCooldown = false; // Reset cooldown after animation completes
-  }, 5000);
+  }, 4000);
 }
 
 function checkForMatch() {
@@ -109,6 +123,7 @@ function checkForMatch() {
 }
 
 function Sigma() {
+  stopAllSounds(); // Stop any currently playing sounds
   const sigmaMessages = document.getElementsByClassName("Sigma-message");
   if (sigmaMessages.length > 0) {
     Array.from(sigmaMessages).forEach(message => {
@@ -123,10 +138,12 @@ function redirectTo(url) {
 }
 
 function MangoMangoMango() {
+  stopAllSounds(); // Stop any currently playing sounds
   sounds["mango"].play();
 }
 
 function BirthDayCelebrationWin() {
+
   const birthdayMessage = document.getElementById("birthdayMessage");
   sounds["confetti"].play();
   birthdayMessage.style.display = "block";
