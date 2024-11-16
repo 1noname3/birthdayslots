@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="index-styles.css">
+</head>
+<body>
+  <div class="centered-div">
+    <!-- Birthday Message -->
+    <div class="birthday-message" id="birthdayMessage">Happy Birthday!</div>
+    <div class="Sigma-message" id="Sigma-message">So sigma no effect needed</div>
+    <div id="confetti-container"></div>
+    <!-- Slots Table -->
+    <table>
+      <tr>
+        <td class="Slot Slot1"></td>
+        <td class="Slot Slot2"></td>
+        <td class="Slot Slot3"></td>
+      </tr>
+    </table>
+    <audio id="confetti-sound" src="pop.m4a" preload="auto"></audio>
+    <audio id="mango-sound" src="mango.m4a" preload="auto"></audio>
+    <audio id="sigma-sound" src="sigma.m4a" preload="auto"></audio>
+    <audio id="slotspinning-sound" src="spinning.m4a" preload="auto"></audio>
+
+    <!-- Spin Button -->
+    <button onclick="startRandomImageAnimation()" class="random-button">Spin</button>
+  </div>
+
+  <script src="index-javascript.js"></script>
+</body>
+</html>
